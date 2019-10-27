@@ -8,13 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
 
     @IBOutlet var loginInput: UITextField!
     @IBOutlet var passwordInput: UITextField!
     @IBOutlet var scrollView: UIScrollView!
+    
     @IBAction func pressButton(_ sender: Any) {
+        let login = loginInput.text!
+        let password = passwordInput.text!
+        
+        if login == "" && password == "" {
+                print("Успешная авторизация")
+        } else {
+            print("Неуспешная авторизация")
+        }
+        
     }
     
        override func viewDidLoad() {
@@ -44,6 +54,10 @@ class ViewController: UIViewController {
        
        override func viewDidDisappear(_ animated: Bool) {
            super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
        }
 
        @objc func willShowKeybord(_ notification: Notification) {
